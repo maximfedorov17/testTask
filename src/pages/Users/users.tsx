@@ -38,6 +38,7 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 		<>
 			<div className='userPageContainer'>
 				<div className='userTableContainer'>
+					{adminMode && <AddUserForm onAddUser={addUser} />}
 					<table className='userTable'>
 						<thead>
 							<tr>
@@ -65,7 +66,7 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 							))}
 						</tbody>
 					</table>
-					{adminMode && <AddUserForm onAddUser={addUser} />}
+
 					{isModalOpen && (
 						<EditUserModal
 							isOpen={isModalOpen}
