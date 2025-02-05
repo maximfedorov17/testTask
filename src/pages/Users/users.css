@@ -1,0 +1,35 @@
+.userTableContainer {
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	width: 500px;
+}
+
+.userTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.userTable,
+th,
+td {
+	border: 1px solid #ddd;
+}
+
+th,
+td {
+	padding: 10px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+.userPageContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

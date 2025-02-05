@@ -1,0 +1,20 @@
+.add-user-form {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.add-user-form input {
+	padding: 10px 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+}
+
+.add-user-form button {
+	padding: 10px 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}

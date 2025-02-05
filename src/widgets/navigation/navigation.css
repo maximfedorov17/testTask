@@ -1,0 +1,26 @@
+.tab-headers {
+	display: flex;
+	background-color: white;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+	border-bottom: 1px solid #e0e0e0;
+	margin-bottom: 50px;
+}
+
+.tab-header {
+	flex-grow: 1;
+	text-align: center;
+	padding: 15px 20px;
+	color: #666;
+	font-weight: 500;
+	text-decoration: none;
+	position: relative;
+	transition: all 0.3s ease;
+}
+
+.tab-header:hover {
+	color: #34db37;
+}
+
+.tab-header:active {
+	color: #34db37;
+}
