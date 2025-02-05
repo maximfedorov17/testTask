@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
 		element: <Layout />,
 		children: [
 			{ index: true, element: <Users adminMode={true} /> },
-			{ path: 'goods', element: <Goods /> },
+			{ path: 'goods', element: <Goods adminMode={true} /> },
 			{ path: 'all', element: <All /> },
 		],
 	},

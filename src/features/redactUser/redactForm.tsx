@@ -1,27 +1,34 @@
 import React, { useState } from 'react'
 
-import { UserData } from '../../entities/user/user'
-import './redactUser.css'
+import './redactForm.css'
 
-interface EditUserModalProps {
-	user: UserData
-	onEditUser: (id: number, name: string, age: number) => void
+interface ItemProps {
+	id: number
+	name: string
+	price?: number
+	age?: number
+}
+interface EditModalProps {
+	item: ItemProps
+	onEdit: (id: number, name: string, number: number) => void
 	isOpen: boolean
 	closeModal: (state: boolean) => void
+	typeOfForm: string
 }
 
-const EditUserModal: React.FC<EditUserModalProps> = ({
-	user,
-	onEditUser,
+const EditModal: React.FC<EditModalProps> = ({
+	item,
+	onEdit,
 	closeModal,
 	isOpen,
+	typeOfForm,
 }) => {
-	const [name, setName] = useState(user.name)
-	const [age, setAge] = useState(user.age)
+	const [name, setName] = useState(item.name)
+	const [number, setNumber] = useState(item.age || item.price || 0)
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
-		onEditUser(user.id, name, age)
+		onEdit(item.id, name, number)
 		closeModal(!isOpen)
 	}
 
@@ -30,10 +37,12 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 			{isOpen && (
 				<div className='modalOverlay'>
 					<div className='redactUser'>
-						<h2>Редактировать пользователя</h2>
+						<h2>Редактировать </h2>
 						<form onSubmit={handleSubmit}>
 							<div>
-								<label htmlFor='name'>Имя:</label>
+								<label htmlFor='name'>
+									{typeOfForm === 'user' ? 'Имя' : 'Название'}
+								</label>
 								<input
 									type='text'
 									id='name'
@@ -43,12 +52,14 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 								/>
 							</div>
 							<div>
-								<label htmlFor='age'>Возраст:</label>
+								<label htmlFor='number'>
+									{typeOfForm === 'user' ? 'Возраст' : 'Цена'}
+								</label>
 								<input
 									type='number'
-									id='age'
-									value={age}
-									onChange={e => setAge(Number(e.target.value))}
+									id='number'
+									value={number}
+									onChange={e => setNumber(Number(e.target.value))}
 									required
 								/>
 							</div>
@@ -66,4 +77,4 @@ const EditUserModal: React.FC<EditUserModalProps> = ({
 	)
 }
 
-export default EditUserModal
+export default EditModal

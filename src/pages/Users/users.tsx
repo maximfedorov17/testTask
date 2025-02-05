@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { User, UserData } from '../../entities/user/user'
-import AddUserForm from '../../features/addUser/addUser'
-import EditUserModal from '../../features/redactUser/redactUser'
+import AddForm from '../../features/addUser/addForm'
+import EditModal from '../../features/redactUser/redactForm'
 import { usersData } from '../../processes/data/users'
 import './users.css'
 
@@ -38,7 +38,7 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 		<>
 			<div className='userPageContainer'>
 				<div className='userTableContainer'>
-					{adminMode && <AddUserForm onAddUser={addUser} />}
+					{adminMode && <AddForm typeOffForm='user' onAdd={addUser} />}
 					<table className='userTable'>
 						<thead>
 							<tr>
@@ -68,10 +68,11 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 					</table>
 
 					{isModalOpen && (
-						<EditUserModal
+						<EditModal
+							typeOfForm='user'
 							isOpen={isModalOpen}
-							user={currentUser || { id: 0, name: '', age: 0 }}
-							onEditUser={handleEditUser}
+							item={currentUser || { id: 0, name: '', age: 0 }}
+							onEdit={handleEditUser}
 							closeModal={() => {
 								setModalOpen(false)
 							}}

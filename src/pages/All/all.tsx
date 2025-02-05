@@ -6,7 +6,7 @@ export const All = () => {
 		<>
 			<div className='allContainer'>
 				<Users adminMode={false} />
-				<Goods />
+				<Goods adminMode={false} />
 			</div>
 		</>
 	)

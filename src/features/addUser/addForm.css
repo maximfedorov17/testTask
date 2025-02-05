@@ -1,16 +1,16 @@
-.add-user-form {
+.add-form {
 	display: flex;
-	justify-content: space-between;
 	gap: 10px;
+	align-self: center;
 }
 
-.add-user-form input {
+.add-form input {
 	padding: 10px 10px;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 }
 
-.add-user-form button {
+.add-form button {
 	padding: 10px 10px;
 	background-color: #4caf50;
 	color: white;
