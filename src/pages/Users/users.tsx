@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { User } from '../../entities/user/user'
+import { User, UserData } from '../../entities/user/user'
 import AddUserForm from '../../features/addUser/addUser'
+import EditUserModal from '../../features/redactUser/redactUser'
 import { usersData } from '../../processes/data/users'
 import './users.css'
 
@@ -11,8 +12,19 @@ interface UserProps {
 export const Users: React.FC<UserProps> = ({ adminMode }) => {
 	const [users, setUsers] = useState(usersData)
 
+	const [isModalOpen, setModalOpen] = useState(false)
+	const [currentUser, setCurrentUser] = useState<UserData | null>(null)
+
 	const deleteUser = (id: number) => {
 		setUsers(users.filter(user => user.id !== id))
+	}
+
+	const handleEditUser = (id: number, name: string, age: number) => {
+		setCurrentUser({ id, name, age })
+		setUsers(
+			users.map(user => (user.id === id ? { ...user, name, age } : user))
+		)
+		setModalOpen(true)
 	}
 
 	const addUser = (name: string, age: number) => {
@@ -32,6 +44,7 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 								<th>Имя</th>
 								<th>Возраст</th>
 								{adminMode && <th>Удалить</th>}
+								{adminMode && <th>Изменить</th>}
 							</tr>
 						</thead>
 						<tbody>
@@ -45,11 +58,24 @@ export const Users: React.FC<UserProps> = ({ adminMode }) => {
 									delete={() => {
 										deleteUser(user.id)
 									}}
+									redact={() => {
+										handleEditUser(user.id, user.name, user.age)
+									}}
 								/>
 							))}
 						</tbody>
 					</table>
 					{adminMode && <AddUserForm onAddUser={addUser} />}
+					{isModalOpen && (
+						<EditUserModal
+							isOpen={isModalOpen}
+							user={currentUser || { id: 0, name: '', age: 0 }}
+							onEditUser={handleEditUser}
+							closeModal={() => {
+								setModalOpen(false)
+							}}
+						/>
+					)}
 				</div>
 			</div>
 		</>
