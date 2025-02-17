@@ -1,5 +1,5 @@
-import { Goods } from '../Goods/goods'
-import { Users } from '../Users/users'
+import { Goods } from '../../Goods'
+import { Users } from '../../Users'
 import './all.css'
 export const All = () => {
 	return (

@@ -1,16 +1,21 @@
 import React, { useState } from 'react'
-
 import './redactForm.css'
-
 interface ItemProps {
-	id: number
+	uid: number
 	name: string
 	price?: number
 	age?: number
+	comment?: string
 }
+
 interface EditModalProps {
 	item: ItemProps
-	onEdit: (id: number, name: string, number: number) => void
+	onEdit: (
+		uid: number,
+		name: string,
+		number: number,
+		comment: string
+	) => Promise<void>
 	isOpen: boolean
 	closeModal: (state: boolean) => void
 	typeOfForm: string
@@ -25,11 +30,16 @@ const EditModal: React.FC<EditModalProps> = ({
 }) => {
 	const [name, setName] = useState(item.name)
 	const [number, setNumber] = useState(item.age || item.price || 0)
+	const [comment, setComment] = useState(item.comment || '')
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		onEdit(item.id, name, number)
-		closeModal(!isOpen)
+		try {
+			await onEdit(item.uid, name, number, comment)
+			closeModal(false)
+		} catch (error) {
+			console.error('Ошибка при редактировании:', error)
+		}
 	}
 
 	return (
@@ -61,6 +71,15 @@ const EditModal: React.FC<EditModalProps> = ({
 									value={number}
 									onChange={e => setNumber(Number(e.target.value))}
 									required
+								/>
+							</div>
+
+							<div>
+								<label htmlFor='comment'>Описание</label>
+								<textarea
+									id='comment'
+									value={comment}
+									onChange={e => setComment(e.target.value)}
 								/>
 							</div>
 							<div className='button-splitter'>

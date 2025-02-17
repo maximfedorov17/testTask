@@ -24,3 +24,6 @@
 .reduct-btn:hover {
 	background-color: #2e409c;
 }
+tr {
+	height: 100%;
+}
